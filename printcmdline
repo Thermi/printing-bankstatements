@@ -1,0 +1,6 @@
+# Use this command line and replace the value of the "-name" parameter
+# of `find` to select what files to print. You could, of course, also
+# use other parameters of find. This is just an example. Do whatever you like,
+# just don't complain to me if it doesn't work out for you.
+
+find . -name '*Kontoauszug*2016*' | xargs -L 1 -I '{}' -- ./print.sh '{}'
