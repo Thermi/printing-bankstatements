@@ -23,5 +23,8 @@ else
 	pages=1
 fi
 
-lpr -d "${PRINTER}" -o page-range=${pages}
 echo "$1 pages: ${pages}"
+# convert PDF to pure post script first and print all pages but the last.
+# My bank includes some disclaimers on the last page. That last page has no other content,
+# so it can be safely left out without lacking any relevant information.
+pdftops -paper A4 -preload "$1" -l "${pages_orig_dec}" - | lpr -P "${PRINTER}" -o page-range=${pages} -
